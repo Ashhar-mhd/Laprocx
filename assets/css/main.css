@@ -1,0 +1,1907 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,700;1,800&display=swap");
+:root {
+    --thm-blue: #002244;
+    --thm-head: #002244;
+    --thm-fent-blue: #5d8aa8;
+    --thm-white: #fff;
+    --thm-black: #000;
+    --thm-fade-black: #141414;
+    --thm-fade-green: #053f1d;
+    --thm-yellow: #002244;
+    --thm-footer-bg: #0a132b;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+
+@font-face {
+    font-family: "Kamerik-Bold";
+    src: url("../fonts/Kamerik-Bold.woff2") format("woff2"), url("../fonts/Kamerik-Bold.woff") format("woff");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Kamerik-book";
+    src: url("../fonts/Kamerik-Book.woff2") format("woff2"), url("../fonts/Kamerik-Book.woff") format("woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Kamerik-heavy";
+    src: url("../fonts/Kamerik-Heavy.woff2") format("woff2"), url("../fonts/Kamerik-Heavy.woff") format("woff");
+    font-weight: normal;
+}
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+body {
+    padding: 0;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body ul,
+body ol {
+    padding: 0px;
+    margin: 0px;
+}
+
+body ul li,
+body ol li {
+    list-style: none;
+}
+
+body a {
+    text-decoration: none;
+}
+
+body img,
+body svg {
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+body .thm-yellow {
+    color: var(--thm-yellow);
+}
+
+body .explore-moew-btn {
+    background: #212c66;
+    height: 35px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    float: left;
+    display: flex;
+    align-items: center;
+    font-family: "Kamerik-Bold";
+    font-size: 14px;
+    color: #fff !important;
+    transition: all 0.2s ease-in-out;
+}
+
+body .explore-moew-btn .btn-text {
+    flex: 1 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: #fff;
+    background: #212c66;
+    transition: 0.2s;
+    padding: 0px 15px;
+    transition: all 0.2s ease-in-out;
+}
+
+body .explore-moew-btn span {
+    background: var(--thm-fent-blue);
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+body .explore-moew-btn span img {
+    transition: all 0.2s ease-in-out;
+}
+
+body .explore-moew-btn:hover span img {
+    margin-left: 5px;
+}
+
+.service-span {
+    font-size: 18px;
+    color: var(--thm-fent-blue);
+    font-family: "Kamerik-Bold";
+    position: relative;
+}
+
+.second-heading {
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+    font-family: "Kamerik-heavy";
+    color: var(--thm-head);
+    padding-top: 20px;
+    width: 75%;
+    position: relative;
+}
+
+.toggle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0px;
+    z-index: 10000000000000;
+}
+
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+.toggle span {
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    background: var(--thm-white);
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.toggle span:nth-child(1) {
+    transform: translateY(-15px);
+    width: 25px;
+    left: 15px;
+}
+
+.toggle.active span:nth-child(1) {
+    width: 40px;
+    transform: translateY(0) rotate(45deg);
+    transition-delay: 0.125s;
+}
+
+.toggle span:nth-child(2) {
+    transform: translateY(15px);
+    width: 15px;
+    left: 15px;
+}
+
+.toggle.active span:nth-child(2) {
+    width: 40px;
+    transform: translateY(0) rotate(315deg);
+    transition-delay: 0.25s;
+}
+
+.toggle.active span:nth-child(3) {
+    transform: translateX(60px);
+}
+
+.navbar-collapse.collapse.show {
+    transform: translateX(-100%);
+    transition: all 0.5s ease-in-out;
+    padding: 60px;
+}
+
+.navbar-collapse.collapse.show {
+    position: fixed;
+    left: 0;
+    background: var(--thm-blue);
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    transform: translateX(0%);
+}
+
+.main {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.header {
+    position: fixed;
+    z-index: 10000;
+    transition: all 0.3s ease-in-out;
+    margin-top: 40px;
+    top: 0;
+}
+
+.header .menu-none {
+    opacity: 0;
+}
+
+.header .logo {
+    width: 10vw;
+}
+
+.header .navbar-nav .nav-item {
+    padding: 0px 15px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .navbar-nav .nav-item .nav-link {
+    color: var(--thm-white) !important;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.header .navbar-nav .nav-item:hover a {
+    margin-top: -5px;
+}
+
+.header .navbar-nav .dropdown .flex-menu {
+    display: flex;
+    grid-gap: 30px;
+    gap: 30px;
+    text-align: center;
+}
+
+.header .navbar-nav .dropdown .flex-menu ul {
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.header .navbar-nav .dropdown .flex-menu ul p {
+    padding-bottom: 10px;
+    color: var(--thm-fent-blue);
+}
+
+.header .navbar-nav .dropdown .flex-menu ul li {
+    padding: 10px 0px;
+}
+
+.header .navbar-nav .dropdown .flex-menu ul li:nth-child(1) a {
+    /* display: none; */
+    color: var(--thm-fent-blue);
+    font-weight: bold;
+}
+
+.header .navbar-nav .dropdown .flex-menu ul li a {
+    color: var(--thm-fade-black);
+    font-weight: 500;
+}
+
+.header .navbar-nav .dropdown .flex-menu ul:nth-child(2n) {
+    background: #fbfbfb;
+}
+
+.header .navbar-nav .dropdown .flex-menu ul:nth-child(2n) li a {
+    color: var(--thm-fent-blue);
+    font-weight: bold;
+}
+
+.header .navbar-nav .dropdown:hover .dropdown-menu {
+    display: block !important;
+    top: 100%;
+    width: 41vw;
+    right: 0;
+    border-radius: 16px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.header .dropdown-toggle::after {
+    display: none;
+}
+
+.inner-header {
+    position: relative;
+    margin: 0px !important;
+    background: var(--thm-blue);
+}
+
+.inner-header .menu-none {
+    opacity: 2;
+}
+
+.header-fixed {
+    background-color: var(--thm-blue);
+    margin-top: 0px !important;
+    position: fixed !important;
+}
+
+.header-fixed .menu-none {
+    opacity: 2;
+}
+
+.hero-banner {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1E86A1;
+    position: relative;
+}
+
+.hero-banner img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+    transform: scale(1.4);
+    transition: 3s;
+    transform: scale(1);
+}
+
+.hero-banner .hero-text {
+    z-index: 1;
+    color: #fff;
+    text-align: center;
+    padding-top: 65px;
+}
+
+.hero-banner .hero-text .who-we-are {
+    font-size: 29px;
+    font-family: "Kamerik-Bold";
+    padding-top: 60px;
+}
+
+.hero-banner .hero-text h1 {
+    font-size: 130px;
+    font-family: "Kamerik-heavy";
+    line-height: 110%;
+    letter-spacing: -6%;
+}
+
+.hero-banner .hero-text .commit-span {
+    font-size: 29px;
+    font-weight: 500;
+    font-family: "Kamerik-book";
+    line-height: 100%;
+    letter-spacing: -6%;
+}
+
+.hero-banner .hero-text .demo a {
+    transform: translate(0, -50%);
+    color: #fff;
+    font: normal 400 20px/1 "Josefin Sans", sans-serif;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.hero-banner .hero-text .demo a:hover {
+    opacity: 0.5;
+}
+
+.hero-banner .hero-text #section07 {
+    position: absolute;
+    /* bottom: 0; */
+    z-index: 10000000;
+    left: 0;
+    right: 0;
+    top: 84%;
+}
+
+.hero-banner .hero-text #section07 a {
+    padding-top: 80px;
+}
+
+.hero-banner .hero-text #section07 a span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -12px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    transform: rotate(-45deg);
+    -webkit-animation: sdb07 2s infinite;
+    animation: sdb07 2s infinite;
+    opacity: 0;
+    box-sizing: border-box;
+}
+
+.hero-banner .hero-text #section07 a span:nth-of-type(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+.hero-banner .hero-text #section07 a span:nth-of-type(2) {
+    top: 16px;
+    -webkit-animation-delay: 0.15s;
+    animation-delay: 0.15s;
+}
+
+.hero-banner .hero-text #section07 a span:nth-of-type(3) {
+    top: 32px;
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+@-webkit-keyframes sdb07 {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes sdb07 {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.footer {
+    background-color: var(--thm-footer-bg);
+    width: 100%;
+    float: left;
+}
+
+.footer .footer-top {
+    padding: 20px;
+    display: flex;
+    background: var(--thm-fade-green);
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.footer .footer-top a {
+    color: rgba(255, 255, 255, 0.79) !important;
+    font-weight: bolder;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer .footer-top .s-line {
+    margin: 0px 1rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.79) !important;
+}
+
+.footer .footer-com-text p {
+    color: var(--thm-white);
+    margin-bottom: 30px;
+    font-family: "Kamerik-Bold";
+    font-size: 14px;
+}
+
+.footer .footer-com-text ul li {
+    margin-bottom: 20px;
+}
+
+.footer .footer-com-text ul li a {
+    color: var(--thm-white);
+    opacity: 0.5;
+    font-family: "Kamerik-book";
+    font-size: 13px;
+    transition: all 0.2s ease-in-out;
+}
+
+.footer .footer-com-text ul li a:hover {
+    opacity: 1;
+}
+
+.footer .footer-com-text iframe {
+    border-radius: 15px;
+}
+
+.footer .footer-com-text .flex-week {
+    color: #fff;
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-family: "Kamerik-book";
+    opacity: 0.5;
+}
+
+.footer .footer-com-text .flex-week span:nth-child(1) {
+    flex: 0 0 30%;
+}
+
+.footer .footer-com-text .social-flex li {
+    margin-bottom: 0px;
+    margin-right: 15px;
+}
+
+.footer .footer-com-text .social-flex li a i {
+    background-color: #71869b;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #131a2c;
+}
+
+.footer .footer-com-text .mail-sec {
+    margin-top: 40px;
+}
+
+.footer .footer-com-text .mail-sec p {
+    margin-bottom: 6px;
+}
+
+.footer .footer-com-text .mail-sec a {
+    color: var(--thm-white);
+    opacity: 0.5;
+    width: 100%;
+    float: left;
+    margin-bottom: 30px;
+    font-size: 13px;
+    transition: all 0.2s ease-in-out;
+}
+
+.footer .footer-com-text .mail-sec a:hover {
+    opacity: 1;
+}
+
+.footer .copyright-sec {
+    display: flex;
+    width: 100%;
+    height: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    justify-content: space-between;
+    padding: 30px 0px 10px 0px;
+    margin-top: 40px;
+}
+
+.footer .copyright-sec .footer-logo-text {
+    display: flex;
+}
+
+.footer .copyright-sec .footer-logo-text img {
+    width: 10vw;
+    float: left;
+    margin-right: 30px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+.footer .copyright-sec .footer-logo-text p {
+    color: var(--thm-white);
+}
+
+.footer .copyright-sec .footer-logo-text p span {
+    width: 100%;
+    float: left;
+    font-size: 13px;
+}
+
+.footer .copyright-sec .terms-condition {
+    color: var(--thm-white);
+    opacity: 0.5;
+    font-size: 14px;
+}
+
+.top-65 {
+    margin-top: 65px !important;
+}
+
+.top-135 {
+    margin-top: 135px;
+}
+
+.our-services-sec {
+    padding: 0px 100px 100px 100px;
+}
+
+.our-services-sec .big-fent-servrice {
+    font-size: 115px;
+    color: #f7f7f7;
+    font-family: "Kamerik-heavy";
+    text-transform: uppercase;
+}
+
+.our-services-sec .position-span {
+    position: absolute;
+    left: 0;
+    top: -43px;
+}
+
+.our-services-sec .text-part p {
+    margin-top: 30px;
+    width: 75%;
+    font-size: 15px;
+    line-height: 27px;
+    color: #000;
+    font-family: "Kamerik-book";
+    font-weight: 500;
+}
+
+.our-services-sec .img-part {
+    width: 100%;
+    float: left;
+}
+
+.our-services-sec .img-part .big-fent-servrice {
+    font-size: 94px;
+    color: #f7f7f7;
+    font-family: "Kamerik-heavy";
+    margin-top: -24px;
+    width: 100%;
+    float: left;
+    text-align: right;
+}
+
+.our-services-sec .img-part img {
+    width: 87%;
+    float: right;
+}
+
+.visa-services-sec .visa-main-flex {
+    margin: auto;
+    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.visa-services-sec .visa-main-flex .inner-flex-main {
+    display: flex;
+    flex-direction: column;
+    max-width: 100px;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.visa-services-sec .visa-main-flex .inner-flex-main span {
+    color: #1b296c;
+    font-weight: 700;
+    font-family: "Kamerik-book";
+    font-size: 14px;
+}
+
+.visa-services-sec .visa-main-flex .inner-flex-main .shadow-flex {
+    height: 70px;
+    width: 70px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 14px;
+    border-radius: 5px;
+}
+
+.visa-services-sec .visa-main-flex .inner-flex-main .shadow-flex img {
+    height: 30px;
+}
+
+.consultancy-sec h2 {
+    width: 50% !important;
+    margin: auto;
+}
+
+.consultancy-sec p {
+    margin: auto;
+    padding: 30px 0px;
+    margin-top: 30px;
+    width: 70% !important;
+    font-size: 15px;
+    line-height: 27px;
+    color: #000;
+    font-family: "Kamerik-book";
+    font-weight: 500;
+}
+
+.consultancy-sec .bg-position {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    overflow: hidden;
+}
+
+.consultancy-sec .bg-position .scale-part {
+    transform: scale(1);
+}
+
+.consultancy-sec .bg-position .scale-part img {
+    width: 100%;
+}
+
+.consultancy-sec .img-sec {
+    width: 50%;
+    margin: auto;
+    max-width: 50%;
+}
+
+.undertake-sec {
+    position: relative;
+}
+
+.undertake-sec .logos-flex {
+    display: flex;
+    margin-top: 40px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-right: 4%;
+}
+
+.undertake-sec .logos-flex .inner-logo {
+    width: 40%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.undertake-sec .logos-flex .inner-logo img {
+    height: 80px;
+}
+
+.undertake-sec .text-part {
+    padding-right: 14%;
+}
+
+.undertake-sec .text-part p {
+    margin-top: 30px;
+    width: 75%;
+    font-size: 15px;
+    line-height: 27px;
+    color: #000;
+    font-family: "Kamerik-book";
+}
+
+.undertake-sec .position-abstract {
+    position: absolute;
+    top: -250px;
+    right: 0;
+    width: auto;
+}
+
+.complete-solution-sec {
+    position: relative;
+    width: 100%;
+    float: left;
+}
+
+.complete-solution-sec .position-abstract-left {
+    position: absolute;
+    top: 0px;
+    right: auto;
+    left: 0;
+    width: auto;
+}
+
+.complete-solution-sec .text-part {
+    z-index: 2;
+    position: relative;
+}
+
+.complete-solution-sec .text-part h2 {
+    padding-right: 20%;
+}
+
+.complete-solution-sec .img-sec img {
+    transform: scale(1.15);
+}
+
+.map-sec .text-part {
+    z-index: 2;
+    position: relative;
+}
+
+.map-sec .text-part p {
+    margin: auto;
+}
+
+.map-sec .map-img-sec {
+    position: absolute;
+    width: 78%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 0.9;
+}
+
+.work-card-sec {
+    width: 100%;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    position: relative;
+}
+
+.about-us-img img {
+    width: 100%;
+}
+
+.work-card-sec .main-img-card {
+    width: 50%;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    height: 150px;
+    z-index: 100;
+}
+
+.work-card-sec .main-img-card img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.work-card-sec .main-img-card .overflow-part {
+    background: linear-gradient(0deg, #000, rgba(0, 0, 0, 0.41) 50%, transparent);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    padding: 20px;
+    font-family: "Kamerik-heavy";
+    font-size: 13px;
+    display: flex;
+    align-items: end;
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+}
+
+.work-card-sec .main-img-card .overflow-part span {
+    transform: translate(0px, 50px);
+    transition: all 0.2s ease-in-out;
+}
+
+.work-card-sec .main-img-card:hover .overflow-part {
+    opacity: 2;
+}
+
+.work-card-sec .main-img-card:hover .overflow-part span {
+    transform: translate(0px, 5px);
+}
+
+.header-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-banner h1 {
+    position: absolute;
+    font-family: "Kamerik-Bold";
+    color: #fff;
+    z-index: 2;
+}
+
+.header-banner section.header-banner img {
+    width: 100%;
+    top: 33px;
+    bottom: 0;
+    position: absolute;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.header-banner::after {
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: "";
+}
+
+.header-banner .bread {
+    position: absolute;
+    left: 20px;
+    bottom: 0px;
+    color: #fff;
+    z-index: 2;
+}
+
+.header-banner .bread a {
+    color: #fff;
+}
+
+.header-banner .bread .breadcrumb-item.active {
+    color: #fff;
+}
+
+.header-banner .bread .breadcrumb-item+.breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, "/");
+    color: #ccc;
+    /* margin: 0 10px; */
+}
+
+.content-part {
+    padding: 60px 0px;
+}
+
+.content-part .text-part h2 {
+    font-Family: "Kamerik-Bold";
+    width: 85% !important;
+    float: left;
+    font-size: 26px;
+}
+
+.content-part .text-part p {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 30px;
+    color: #777;
+    font-family: "Kamerik-book";
+    width: 80%;
+    float: left;
+}
+
+.content-part .img-sec {
+    margin: 0 0 30px;
+    height: 295px;
+    overflow: hidden;
+    border-radius: 12px;
+    width: 98%;
+}
+
+.content-part .img-sec img {
+    border-radius: 12px;
+}
+
+.content-part .txet-part {
+    padding-left: 7%;
+}
+
+.content-part .big-text-part h3 {
+    font-size: 23px;
+    margin: 30px 0;
+    color: var(--thm-head);
+    font-family: "Kamerik-Bold";
+    width: 100%;
+    float: left;
+}
+
+.content-part .big-text-part p {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 30px;
+    color: #777;
+    font-family: "Kamerik-book";
+}
+
+.content-part strong {
+    font-family: 'Kamerik-Bold';
+}
+
+.testimonial h2 {
+    font-size: 28px;
+    color: #212c66;
+    font-family: "Kamerik-Bold";
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.testimonial .main-box {
+    flex: 1 1;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 3px rgba(182, 182, 182, 0.24);
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    border: 1px solid hsla(0deg, 8%, 84%, 0.388);
+    margin: auto auto 60px;
+    width: 400px !important;
+}
+
+.testimonial .main-box p {
+    font-family: "Kamerik-book";
+    font-size: 15px;
+    max-width: 300px;
+    text-align: center;
+    line-height: 25px;
+    margin: 20px 0 30px;
+}
+
+.testimonial .main-box h4 {
+    font-family: "Kamerik-Bold";
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0 8px;
+}
+
+.testimonial .main-box .user-icon {
+    border-radius: 100%;
+    height: 60px;
+    width: 60px;
+    margin: 20px 0;
+}
+
+.testimonial .main-box .five-star {
+    max-width: 40%;
+}
+
+.testimonial .swiper-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
+.testimonial .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+    left: 60px;
+    right: 0;
+    margin: auto;
+    bottom: 20px;
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+}
+
+.testimonial .swiper-pagination-bullet-active-main {
+    background: #000;
+}
+
+.faq-sec {
+    background: #111a41;
+    padding: 80px 30px;
+    max-width: unset;
+    float: left;
+}
+
+.faq-sec ol {
+    padding-left: 15px;
+}
+
+.faq-sec ol li {
+    list-style: none;
+    list-style: lower-roman;
+    font-size: 16px;
+    line-height: 26px;
+    color: #777;
+    font-family: "Kamerik-book";
+    padding-bottom: 20px;
+}
+
+.faq-sec ol li:nth-last-of-type(1) {
+    padding-bottom: 0px !important;
+}
+
+.faq-sec h2 {
+    font-size: 26px;
+    font-family: "Kamerik-heavy";
+    color: #fff;
+    padding-bottom: 30px;
+    max-width: 81%;
+    margin: auto;
+}
+
+.faq-sec h3 {
+    /* padding-bottom: 10px; */
+    font-family: "Kamerik-Bold";
+    color: #333 !important;
+    cursor: pointer;
+    font-size: 36px !important;
+    border: 0px;
+}
+
+.faq-sec h3 button {
+    border-bottom: 1px solid #827d7d;
+    padding: 20px 0px;
+}
+
+.faq-sec .accordion {
+    max-width: 81%;
+    margin: auto;
+    padding: 20px 20px 0px 40px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.faq-sec .accordion .accordion-item {
+    border: 0px !important;
+}
+
+.faq-sec .accordion .accordion-item .accordion-button:focus {
+    z-index: 3;
+    border-color: #333;
+    outline: 0;
+    box-shadow: none;
+}
+
+.faq-sec .accordion .accordion-button:not(.collapsed) {
+    color: #333 !important;
+    background-color: transparent;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+
+.faq-sec .accordion p {
+    font-size: 16px;
+    line-height: 26px;
+    color: #777;
+    font-family: "Kamerik-book";
+}
+
+.gallery-sec .second-heading {
+    max-width: 50%;
+    margin: auto;
+    padding-bottom: 70px;
+}
+
+.gallery-sec .gallery-bg-sec img {
+    width: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+}
+
+.gallery-sec .main-gallery-flex {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90%;
+    margin: auto;
+}
+
+.gallery-sec .main-gallery-flex .gallary-card {
+    width: 25%;
+    float: left;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.gallery-sec .main-gallery-flex .gallary-card figure {
+    margin: 0px;
+}
+
+.gallery-sec .main-gallery-flex .gallary-card img {
+    height: 190px;
+    width: 100%;
+    float: left;
+    overflow: hidden;
+    -o-object-fit: cover;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery-sec .main-gallery-flex .gallary-card:hover img {
+    transform: scale(1.05);
+    z-index: 2;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.goverment-services-sec .second-heading {
+    max-width: 50%;
+    margin: auto;
+}
+
+.goverment-services-sec .client-logo-flex {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 95%;
+    margin: auto;
+    padding-top: 70px;
+}
+
+.goverment-services-sec .client-logo-flex .main-client-logo {
+    width: 16.66%;
+    float: left;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-part {
+    position: relative;
+}
+
+.three-d-sec iframe {
+    width: 100%;
+    height: 380px;
+}
+
+span.department {
+    font-size: 16px;
+    color: #7c83a5;
+    text-align: center;
+    letter-spacing: 2px;
+    font-family: "Kamerik-heavy";
+    font-style: italic;
+}
+
+.contact-page {
+    padding: 0px 6.8%;
+}
+
+.contact-page .contact-sec-main {
+    position: relative;
+    padding: 120px 100px 120px 0px;
+    width: 100%;
+    float: left;
+}
+
+.contact-page .contact-sec-main::before {
+    width: 60%;
+    background: #e5a80b;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+
+.contact-page .contact-sec {
+    position: relative;
+    background: #131a2c;
+    padding: 50px;
+    color: #fff;
+    border-radius: 16px;
+    line-height: 25px;
+    width: 90%;
+    float: left;
+    margin-left: 8%;
+}
+
+.contact-page .contact-sec::after {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    content: "";
+    display: block;
+    left: -15px;
+    top: 50px;
+    background: #e5a80b;
+}
+
+.contact-page .contact-sec .contact-img-span {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    float: left;
+    align-items: center;
+    color: #fff;
+    font-family: "Kamerik-Bold";
+}
+
+.contact-page .contact-sec .position-left-img {
+    position: absolute;
+    width: 17%;
+    left: 0px;
+    bottom: 0px;
+}
+
+.contact-page .contact-form {
+    padding: 100px 20px 100px 135px;
+}
+
+.contact-page .contact-form .form-group input {
+    width: 100%;
+    border-width: 0 0 2px;
+    border-color: #777;
+    width: 100%;
+    outline: none;
+    padding: 10px 0;
+    font-family: "Kamerik-book";
+    margin-bottom: 25px;
+}
+
+.contact-page .contact-form p {
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.contact-page .contact-form label {
+    font-size: 15px;
+    font-weight: 500;
+    width: 100%;
+    float: left;
+}
+
+.contact-page .position-left-img {
+    position: absolute;
+    width: 17%;
+    left: 0px;
+    bottom: 0px;
+}
+
+.follow-sec {
+    width: 100%;
+    font-family: "Kamerik-Bold";
+    font-size: 13px;
+    margin-top: 1rem;
+}
+
+.follow-sec ul {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-reach-us {
+    background: #121a41;
+    padding: 15px 35px;
+    color: #fff !important;
+    font-family: "Kamerik-book";
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+div.contact-img-span {
+    align-items: flex-start !important;
+}
+
+.goverment-services-sec {
+    padding-top: 100px !important;
+}
+
+.immigration-flex-sec {
+    display: grid;
+    grid-gap: 40px;
+    gap: 40px;
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+    padding: 0px 40px;
+}
+
+.immigration-flex-sec .imigration-card {
+    font-family: "Kamerik-book";
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+    background: #212c66;
+    cursor: pointer;
+    margin: 0 0 20px;
+    overflow: hidden;
+    border-radius: 12px;
+    max-width: 300px;
+    transition: all 0.3s ease-in-out;
+}
+
+.immigration-flex-sec .imigration-card figure {
+    overflow: hidden;
+}
+
+.immigration-flex-sec .imigration-card figure img {
+    width: 100%;
+    height: 200px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.immigration-flex-sec .imigration-card .immigration-text-part {
+    padding: 20px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.immigration-flex-sec .imigration-card .immigration-text-part p {
+    font-family: "Kamerik-Bold";
+    margin-bottom: 6px;
+    font-size: 17px;
+    color: #fedb2f;
+    font-weight: 600;
+}
+
+.immigration-flex-sec .imigration-card .immigration-text-part a {
+    font-size: 14px;
+    color: #fff;
+}
+
+.immigration-flex-sec .imigration-card:hover {
+    transition: all 0.3s ease-in-out;
+}
+
+.immigration-flex-sec .imigration-card:hover img {
+    transform: scale(1.1);
+}
+
+.imigration-heading {
+    padding: 50px 0px;
+    text-align: center;
+}
+
+.why-choose-sec {
+    text-align: center;
+    font-family: "Kamerik-book";
+    padding: 80px 0;
+    background: #f7f5f5;
+    margin-bottom: 60px;
+}
+
+.why-choose-sec h2 {
+    padding-bottom: 50px;
+}
+
+.why-choose-sec .why-choose-card img {
+    height: 80px;
+}
+
+.why-choose-sec .why-choose-card h6 {
+    margin: 15px 0px;
+    color: #212c66;
+    font-family: "Kamerik-Bold";
+    font-size: 18px;
+}
+
+.why-choose-sec .why-choose-card p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #777;
+    line-height: 22px;
+}
+
+ol.number-list li {
+    list-style: auto;
+    padding: 15px 0px;
+    color: #777;
+}
+
+ol.number-list {
+    padding-left: 30px;
+    margin-top: -15px;
+    padding-bottom: 15px;
+}
+
+ul.charges-list li {
+    padding: 15px 0px;
+    color: #777;
+}
+
+.faq-sec .accordion {
+    max-width: 81%;
+    margin: auto;
+    padding: 20px 20px 25px 40px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.apply-step-list li span {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 30px;
+    color: #777;
+    font-family: "Kamerik-book";
+    width: 100%;
+    float: left;
+}
+
+.apply-step-list li {
+    list-style: auto !important;
+    width: 100%;
+    float: left;
+}
+
+.benifit-list li {
+    margin-left: 35px;
+    list-style: disc;
+    color: #777;
+}
+
+.benifit-list {
+    margin: 35px 0px 35px 10px;
+}
+
+/* body ul, body ol {
+    padding: 0px;
+    margin: 0px;
+    padding-left:50px;
+    color: #777;
+    margin-bottom: 30px;
+} */
+
+.apply-step-list {
+    padding-left: 20px;
+}
+
+.maid-apply-step li {
+    list-style: auto;
+}
+
+.maid-requirment-step li {
+    list-style: auto;
+}
+
+.document-list li {
+    list-style: auto;
+}
+
+.document-process li {
+    list-style: disc;
+}
+
+.medical-list li {
+    list-style: disc;
+}
+
+section.amar.center.py-5 {
+    font-size: 20px;
+}
+
+.medical-sarvice li {
+    list-style: auto;
+    margin: 20px;
+    font-weight: 700;
+}
+
+.med-doc-list li {
+    list-style: disc;
+}
+
+.insurance-document li {
+    list-style: auto;
+    padding: 10px 0px 10px 10px;
+}
+
+.gap-0 {
+    padding-left: 20px;
+}
+
+.gap-0 li span {
+    padding: 0;
+    margin: 0px 0px 10px 0px !important;
+}
+
+.gap-0 li::marker {
+    color: #777;
+}
+
+.accordion-body li {
+    float: none;
+}
+
+.accordion-body li span {
+    float: none;
+}
+
+.accordion .accordion-item:nth-last-of-type(1) .accordion-button {
+    border-bottom: 0px !important;
+    padding-bottom: 10px;
+}
+
+.disc li {
+    list-style: disc !important;
+}
+
+.btn-whatsapp-pulse {
+    background: #30be5d;
+    color: #fff !important;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0;
+    height: 0;
+    padding: 35px;
+    text-decoration: none;
+    border-radius: 50%;
+    animation-name: pulse;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    z-index: 1000000;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    80% {
+        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0.5);
+    }
+}
+
+.btn-whatsapp-pulse-border {
+    bottom: -80px;
+    right: 20px;
+    animation-play-state: paused;
+    transform: translate(0px, 173px);
+}
+
+.btn-whatsapp-pulse-border-new {
+    bottom: 40px !important;
+    right: 20px;
+    transform: translate(0px, 0px);
+}
+
+.btn-whatsapp-pulse-border::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    padding: 25px;
+    border: 5px solid #25d366;
+    opacity: 0.75;
+    animation-name: pulse-border;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse-border {
+    0% {
+        padding: 25px;
+        opacity: 0.75;
+    }
+    75% {
+        padding: 50px;
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.insurance-document li span {
+    margin: 0;
+}
+
+.insurance-document li::marker {
+    color: #777;
+}
+
+.services-card {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    box-shadow: 0 5px 30px rgb(0 0 0 / 20%);
+    border-radius: 10px;
+    -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    transition: all .3s ease-in-out;
+    position: relative;
+}
+
+.services-card:hover {
+    transform: scale(1.05);
+}
+
+.text-part-new {
+    width: 100%;
+    float: left;
+    padding: 50px 40px;
+    position: relative;
+}
+
+.text-part-new .icon {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    padding: 18px;
+    border-radius: 50%;
+    box-shadow: 0 5px 30px rgb(0 0 0 / 20%);
+    bottom: auto;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #fff;
+    top: -35px;
+}
+
+.text-part-new h6 {
+    font-family: Montserrat, sans-serif;
+    color: #212c66;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.text-part-new p {
+    font-family: 'Kamerik-book';
+    font-size: 16px;
+    color: #111;
+    line-height: 27px;
+    padding: 10px 0 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: auto;
+}
+
+.services-card-sec .col-lg-4 {
+    padding: 20px;
+}
+
+.services-card-sec {
+    width: 100%;
+    margin: 100px 0 0;
+}
+
+.services-card figure img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.services-main-page .second-heading {
+    display: -webkit-flex;
+    display: flex;
+    width: 50%;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 25%;
+    font-size: 36px;
+    line-height: inherit;
+}
+
+.position-bg {
+    position: absolute;
+    top: 200px;
+}
+
+.services-main-page p {
+    width: 100%;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    max-width: 800px;
+    text-align: center;
+    margin: auto;
+    font-size: 17px;
+    font-size: 16px;
+    line-height: 27px;
+    color: #000;
+    font-family: 'Kamerik-book';
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.services-main-page .img-part {
+    width: 100%;
+    max-width: 50%;
+    margin: auto;
+    padding: 100px 0px;
+}
+
+.text-part-2 h2 {
+    text-align: left !important;
+    margin: 0px !Important;
+}
+
+.text-part-2 p {
+    text-align: left !Important;
+    width: 65%;
+    float: left;
+}
+
+.img-sec-2 {
+    max-width: 90%;
+    float: right;
+}
+
+.gallery-img-sec img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+.gallery-img-sec .col-12 {
+    padding: 8px;
+}
+
+.services-main-page {
+    padding: 100px 0px;
+}
+
+.gallery-img-sec {
+    padding: 80px 0px 40px 0px;
+    max-width: 85%;
+    margin: auto;
+}
+
+.services-card-sec-2 {
+    padding-top: 80px;
+}
+
+.terms-content {
+    width: 100%;
+    float: left;
+    padding: 0px 10% 50px 10%;
+}
+
+.terms-content h3 {
+    font-family: "Kamerik-Bold";
+    font-size: 20px;
+    color: #333;
+    padding: 10px 0;
+}
+
+.testimonial {
+    width: 100%;
+    float: left;
+}
+
+.terms-content p {
+    font-family: 'Kamerik-book';
+    font-size: 14px;
+    color: #777;
+    padding-bottom: 10px;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    font-size: 15px;
+}
+
+.terms-content ul {
+    padding-left: 20px;
+}
+
+.terms-content li {
+    font-family: 'Kamerik-book';
+    font-size: 14px;
+    color: #777;
+    padding-bottom: 10px;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    font-size: 15px;
+    float: left;
+    list-style: disc;
+}
+
+.terms-content h3 {
+    font-family: "Kamerik-Bold";
+    font-size: 20px;
+    color: #333;
+    padding: 10px 0;
+    font-size: 26px;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.terms-head {
+    width: 100%;
+    float: left;
+    padding-bottom: 60px;
+}
+
+/*# sourceMappingURL=main.css.map */
