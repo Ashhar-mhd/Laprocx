@@ -15,6 +15,9 @@ OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, '..', 'out-' + MO
 BASE = 'https://laprocx.com'
 WA_NUM = '971543368567'
 PHONE = '+971 54 336 8567'
+GTAG = '''
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MRF2XJKM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());</script>'''
 EMAIL = 'laprocx@gmail.com'
 IG_CREDIT = 'https://www.instagram.com/ashar_mhd__/'
 BRAND = os.path.join(HERE, 'brand')        # copied brand assets
@@ -105,7 +108,7 @@ def write_page(c, title, desc, body, schema=(), og_type='website', has_ar=True, 
     full_title = title if 'Laprocx' in title or 'لابروكس' in title else f"{title} | {c.t(('Laprocx','لابروكس'))}"
     doc = f'''<!doctype html>
 <html lang="{c.lang}" dir="{'rtl' if c.ar else 'ltr'}">
-<head>
+<head>{GTAG if MODE=='prod' else ''}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{E(full_title)}</title>
@@ -357,7 +360,7 @@ PRIVACY=[(('What we collect','ما نجمعه'),('We collect the details and doc
  (('How we use it','كيف نستخدمها'),('We use your information only to prepare and submit your applications, contact you about them, and send renewal reminders you asked for.','نستخدم بياناتك فقط لتجهيز طلباتك وتقديمها، والتواصل معك بشأنها، وإرسال تذكيرات التجديد التي طلبتها.')),
  (('Who we share it with','مع من نشاركها'),('We share documents only with the government authorities and service providers (such as insurers or translators) needed for your application.','نشارك المستندات فقط مع الجهات الحكومية ومقدمي الخدمات (مثل شركات التأمين أو المترجمين) اللازمين لمعاملتك.')),
  (('How long we keep it','مدة الاحتفاظ بها'),('We keep documents as long as needed for your application and renewals, then delete them. You can ask us to delete your data at any time.','نحتفظ بالمستندات طوال المدة اللازمة للمعاملة والتجديد ثم نحذفها. يمكنك طلب حذف بياناتك في أي وقت.')),
- (('Website analytics','تحليلات الموقع'),('This website may use analytics to count visits and clicks. It does not collect your documents.','قد يستخدم هذا الموقع أدوات تحليل لعدّ الزيارات والنقرات، ولا يجمع مستنداتك.')),
+ (('Website analytics','تحليلات الموقع'),('This website uses Google Analytics to count visits, the pages people read, and clicks on buttons such as WhatsApp or Call. Google may set cookies to do this. It does not collect your documents, and we never send your name or phone number to Google Analytics.','يستخدم هذا الموقع Google Analytics لعدّ الزيارات والصفحات التي تُقرأ والنقرات على أزرار مثل واتساب والاتصال، وقد تضع Google ملفات تعريف الارتباط لذلك. لا يجمع الموقع مستنداتك، ولا نرسل اسمك أو رقم هاتفك إلى Google Analytics.')),
  (('Contact','التواصل'),(f'For any privacy question, email {EMAIL}.',f'لأي استفسار عن الخصوصية، راسلنا على {EMAIL}.'))]
 TERMS=[(('Our service','خدمتنا'),('Laprocx Business Services is a private company. We prepare and submit applications on your behalf through official government channels. Approval decisions are made by the government authorities, not by Laprocx.','لابروكس لخدمات الأعمال شركة خاصة. نجهز الطلبات ونقدمها نيابةً عنك عبر القنوات الحكومية الرسمية. قرارات الموافقة تتخذها الجهات الحكومية وليس لابروكس.')),
  (('Quotes and fees','العروض والرسوم'),('We send a written quote before we start. Government fees are charged at cost and can change if the authority changes them. Our service fee is agreed in the quote.','نرسل عرضاً مكتوباً قبل البدء. الرسوم الحكومية بتكلفتها الفعلية وقد تتغير إذا غيرتها الجهة المختصة. رسوم خدمتنا يُتفق عليها في العرض.')),
