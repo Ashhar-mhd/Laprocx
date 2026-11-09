@@ -149,9 +149,24 @@ def svc_card(c, s, feature=False):
     return (f'<a class="{cls}" href="{c.url(s["slug"])}" data-k="{E(s["name"][0]+" "+s["name"][1])}"><span class="ic"><svg aria-hidden="true"><use href="#i-{s["icon"]}"/></svg></span>'
             f'<h3>{c.t(s["name"])}</h3><p>{c.t(s["card"])}</p><span class="go">{c.t(("Details →","التفاصيل ←"))}</span></a>')
 
+import datetime as _dt
+for _i,_b in enumerate(BRIEFS):
+    _b['date']=_b['url'].split('/brief/')[1][:10]; _b['_i']=_i
+BRIEFS = sorted(BRIEFS, key=lambda b:(b['date'], b['_i']), reverse=True)  # newest first
 BRIEF_PATH = {b['file'].replace('.html',''): '/brief/' + b['url'].split('/brief/')[1] for b in BRIEFS}
-BRIEF_KEY = {'brief-visa-renewal':'brief-visa','brief-golden-visa':'brief-golden','brief-licence-renewal':'brief-licence'}
-BRIEF_SVC = {'brief-visa':'/visas/family-visa/','brief-golden':'/visas/golden-visa/','brief-licence':'/business/trade-licence-renewal/'}
+def bpath(b): return BRIEF_PATH[b['file'].replace('.html','')]
+_AR_DIG=str.maketrans('0123456789','٠١٢٣٤٥٦٧٨٩')
+_MON_AR=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
+_DAY_AR=['الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت','الأحد']
+def dshort(c, iso):
+    d=_dt.date.fromisoformat(iso)
+    return f"{d.day} {_MON_AR[d.month-1]} {d.year}".translate(_AR_DIG) if c.ar else d.strftime('%-d %b %Y')
+def dlong(c, iso):
+    d=_dt.date.fromisoformat(iso)
+    return f"{_DAY_AR[d.weekday()]} {d.day} {_MON_AR[d.month-1]} {d.year}".translate(_AR_DIG) if c.ar else d.strftime('%A %-d %B %Y')
+def dmeta(c, iso):
+    d=_dt.date.fromisoformat(iso)
+    return f"{_DAY_AR[d.weekday()]} {d.day} {_MON_AR[d.month-1]} {d.year}".translate(_AR_DIG) if c.ar else d.strftime('%a %-d %b %Y')
 
 # ---------------------------------------------------------------- service pages
 def service_page(c, s):
@@ -164,11 +179,10 @@ def service_page(c, s):
     related = [o for o in SERVICES if o['group']==s['group'] and o is not s][:4]
     rel = ''.join(f'<a href="{c.url(o["slug"])}">{c.t(o["name"])}<small>{c.t(o["card"])}</small></a>' for o in related)
     brief_box = ''
-    for b in BRIEFS:
-        key = BRIEF_KEY[b['file'].replace('.html','')]
-        if s.get('brief') == key:
-            bp = BRIEF_PATH[b['file'].replace('.html','')]
-            brief_box = f'<div class="box"><h3>{c.t(("From the Daily Brief","من الموجز اليومي"))}</h3><div class="mini"><a href="{c.url(bp)}">{c.t((b["title_en"],b["title_ar"]))}<small>{c.t(("9 Nov 2026","٩ نوفمبر ٢٠٢٦"))}</small></a></div></div>'
+    rel_b=[b for b in BRIEFS if b['svc']==s['slug']][:3]
+    if rel_b:
+        items_b=''.join(f'<a href="{c.url(bpath(b))}">{c.t((b["title_en"],b["title_ar"]))}<small>{dshort(c,b["date"])}</small></a>' for b in rel_b)
+        brief_box = f'<div class="box"><h3>{c.t(("From the Daily Brief","من الموجز اليومي"))}</h3><div class="mini">{items_b}</div></div>'
     more = ''
     if s.get('more'):
         more = f'<a class="btn btn-ghost" href="{c.url(s["more"][0])}">{c.t(s["more"][1])}</a>'
@@ -355,14 +369,15 @@ TERMS=[(('Our service','خدمتنا'),('Laprocx Business Services is a private 
 def brief_dict(b, c):
     return {k: (b[k+'_ar'] if c.ar else b[k+'_en']) for k in ('topic','title','sum','what','who','do')}
 def brief_page(c, b):
-    key=b['file'].replace('.html',''); bp=BRIEF_PATH[key]; d=brief_dict(b,c)
+    bp=bpath(b); d=brief_dict(b,c)
     items=[HOME_CRUMB,('/brief/',('Daily Brief','الموجز اليومي')),(bp,(b['title_en'],b['title_ar']))]
     srcs=''.join(f'<li><a href="{u}" rel="noopener" target="_blank">{c.t((e,a))}</a></li>' for e,a,u in b['sources'])
-    svc=SVC_BY[BRIEF_SVC[BRIEF_KEY[key]]]
-    others=''.join(f'<a href="{c.url(BRIEF_PATH[o["file"].replace(".html","")])}">{c.t((o["title_en"],o["title_ar"]))}<small>{c.t((o["topic_en"],o["topic_ar"]))}</small></a>' for o in BRIEFS if o is not b)
+    svc=SVC_BY[b['svc']]
+    same=[o for o in BRIEFS if o is not b and o['date']==b['date']] or [o for o in BRIEFS if o is not b]
+    others=''.join(f'<a href="{c.url(bpath(o))}">{c.t((o["title_en"],o["title_ar"]))}<small>{c.t((o["topic_en"],o["topic_ar"]))} · {dshort(c,o["date"])}</small></a>' for o in same[:4])
     body=f'''<div class="wrap">{crumbs_html(c,items)}
 <div class="art"><article>
-<div class="meta" style="margin-top:1.2rem"><span class="tag">{d['topic']}</span><time datetime="2026-11-09">{c.t(('Sun 9 Nov 2026','الأحد ٩ نوفمبر ٢٠٢٦'))}</time><span class="src">{b['src']}</span><span>{c.t(('1 min read','قراءة دقيقة واحدة'))}</span></div>
+<div class="meta" style="margin-top:1.2rem"><span class="tag">{d['topic']}</span><time datetime="{b['date']}">{dmeta(c,b['date'])}</time><span class="src">{b['src']}</span><span>{c.t(('1 min read','قراءة دقيقة واحدة'))}</span></div>
 <h1>{d['title']}</h1><p class="sum">{d['sum']}</p>
 <section class="part"><h2><i></i><span>{c.t(('What it is','ما الموضوع'))}</span></h2>{d['what']}</section>
 <section class="part"><h2><i></i><span>{c.t(('Who it affects','من يتأثر'))}</span></h2>{d['who']}</section>
@@ -371,25 +386,29 @@ def brief_page(c, b):
 <p class="disc">{c.t(('Rules and fees can change. We check the official source before every application.','القواعد والرسوم قد تتغير. نتحقق من المصدر الرسمي قبل كل معاملة.'))}</p>
 </article><aside class="side">
 <div class="box green"><h3>{c.t(('We can handle this for you','نتولاها عنك'))}</h3><p>{c.t(svc['card'])}</p><a class="btn btn-gold" href="{c.url(svc['slug'])}">{c.t(svc['name'])} {c.t(('→','←'))}</a></div>
-<div class="box"><h3>{c.t(('More briefs today','موجزات اليوم الأخرى'))}</h3><div class="mini">{others}</div></div>
+<div class="box"><h3>{c.t(('More briefs','موجزات أخرى'))}</h3><div class="mini">{others}</div></div>
 </aside></div></div>'''
-    schema=[crumbs_schema(c,items),{"@context":"https://schema.org","@type":"Article","headline":d['title'],"description":d['sum'],"datePublished":"2026-11-09","dateModified":"2026-11-09","inLanguage":c.lang,
+    schema=[crumbs_schema(c,items),{"@context":"https://schema.org","@type":"Article","headline":d['title'],"description":d['sum'],"datePublished":b["date"],"dateModified":b["date"],"inLanguage":c.lang,
             "author":{"@type":"Organization","name":"Laprocx Business Services"},"publisher":{"@type":"Organization","name":"Laprocx Business Services","logo":{"@type":"ImageObject","url":BASE+"/assets/app-icon-512.png"}},"mainEntityOfPage":BASE+c.here()}]
     write_page(c, d['title'], d['sum'], body, schema, og_type='article')
 
 def brief_index(c):
     items=[HOME_CRUMB,('/brief/',('Daily Brief','الموجز اليومي'))]
     topic_k={'visa':('Visas','الإقامات'),'golden':('Golden visa','الإقامة الذهبية'),'business':('Business','الأعمال')}
-    cards=''
+    def card(b):
+        d=brief_dict(b,c)
+        return f'<a class="card" href="{c.url(bpath(b))}" data-t="{b["topic"]}"><div class="meta"><span class="tag">{d["topic"]}</span><span class="src">{b["src"]}</span></div><h3>{d["title"]}</h3><p>{d["sum"]}</p><span class="go">{c.t(("Read →","اقرأ ←"))}</span></a>'
+    days=[]
     for b in BRIEFS:
-        d=brief_dict(b,c); bp=BRIEF_PATH[b['file'].replace('.html','')]
-        cards+=f'<a class="card" href="{c.url(bp)}" data-t="{b["topic"]}"><div class="meta"><span class="tag">{d["topic"]}</span><span class="src">{b["src"]}</span></div><h3>{d["title"]}</h3><p>{d["sum"]}</p><span class="go">{c.t(("Read →","اقرأ ←"))}</span></a>'
+        if not days or days[-1][0]!=b['date']: days.append((b['date'],[]))
+        days[-1][1].append(b)
+    days_html=''.join(f'<div class="day"><h2>{dlong(c,dt)}</h2><div class="cards">{"".join(card(b) for b in bs)}</div></div>' for dt,bs in days)
     fb=f'<button type="button" data-t="all" aria-pressed="true">{c.t(("All","الكل"))}</button>'+''.join(f'<button type="button" data-t="{k}" aria-pressed="false">{c.t(v)}</button>' for k,v in topic_k.items())
     body=f'''<div class="wrap">{crumbs_html(c,items)}<div class="ix-head">
 <p class="eyebrow">{c.t(('Laprocx Daily Brief','الموجز اليومي من لابروكس'))}</p><h1>{c.t(('What you need to know today','ما الذي تحتاج معرفته اليوم'))}</h1>
 <p>{c.t(('Short updates every working day on UAE visas, business rules and fees. Each one tells you what it is, who it affects and what to do, with a link to the official source.','موجزات قصيرة كل يوم عمل عن الإقامات والأعمال والرسوم في الإمارات. كل موجز يذكر ما الموضوع، ومن يتأثر، وماذا تفعل، مع رابط المصدر الرسمي.'))}</p>
 <div class="filters" role="group" aria-label="{c.t(('Topic','الموضوع'))}">{fb}</div></div>
-<div class="day"><h2>{c.t(('Sunday 9 November 2026','الأحد ٩ نوفمبر ٢٠٢٦'))}</h2><div class="cards">{cards}</div></div></div>'''
+{days_html}</div>'''
     write_page(c, c.t(('Laprocx Daily Brief: UAE Visa and Business Updates','الموجز اليومي من لابروكس: تحديثات الإقامات والأعمال في الإمارات')),
       c.t(('Short daily updates on UAE visas, business rules and fees, with what to do and a link to the official source.','تحديثات يومية قصيرة عن الإقامات وقواعد الأعمال والرسوم في الإمارات، مع ما يجب فعله ورابط المصدر الرسمي.')), body,
       [crumbs_schema(c,items),{"@context":"https://schema.org","@type":"Blog","name":"Laprocx Daily Brief","url":BASE+c.here(),"inLanguage":c.lang}])
@@ -422,6 +441,27 @@ def home(c):
         del a['data-en-name']
     for a in main.select('a[data-href]'):
         a['href'] = c.url(a['data-href']); del a['data-href']
+    # Daily Brief section: newest brief big, next two beside it
+    top=BRIEFS[0]; d=brief_dict(top,c)
+    first_dd=lambda h: BeautifulSoup(h,'html.parser').get_text(' ',strip=True)
+    today_html=f'''<article class="today"><div class="meta"><time datetime="{top['date']}">{dmeta(c,top['date'])}</time><span class="src">{top['src']}</span><span>{c.t(('1 min read','قراءة دقيقة واحدة'))}</span></div>
+<h3><a href="{c.url(bpath(top))}" style="text-decoration:none">{d['title']}</a></h3>
+<dl><div><dt>{c.t(('What it is','ما الموضوع'))}</dt><dd>{d['sum']}</dd></div><div><dt>{c.t(('Who it affects','من يتأثر'))}</dt><dd>{first_dd(d['who'])}</dd></div></dl>
+<a class="more" href="{c.url(bpath(top))}">{c.t(('Read the full brief →','اقرأ الموجز كاملاً ←'))}</a></article>'''
+    old_today=main.select_one('article.today')
+    if old_today: old_today.replace_with(BeautifulSoup(today_html,'html.parser'))
+    past=main.select_one('div.past')
+    if past:
+        for a in past.find_all('a', recursive=False):
+            if 'btn' not in (a.get('class') or []): a.decompose()
+        ins=''
+        for b in BRIEFS[1:3]:
+            dd=__import__('datetime').date.fromisoformat(b['date'])
+            mon=c.t((dd.strftime('%b'), ['ينا','فبر','مار','أبر','مايو','يون','يول','أغس','سبت','أكت','نوف','ديس'][dd.month-1]))
+            day=f"{dd.day:02d}".translate(_AR_DIG) if c.ar else f"{dd.day:02d}"
+            ins+=f'<a href="{c.url(bpath(b))}"><span class="d"><b>{day}</b><span>{mon}</span></span><span><h4>{c.t((b["title_en"],b["title_ar"]))}</h4><small>{c.t((b["topic_en"],b["topic_ar"]))} · {b["src"]}</small></span></a>'
+        frag=BeautifulSoup(ins,'html.parser')
+        for n in reversed(list(frag.contents)): past.insert(0,n)
     body = ''.join(str(x) for x in main.contents)
     ld = {"@context":"https://schema.org","@type":"ProfessionalService","name":"Laprocx Business Services","alternateName":"لابروكس لخدمات الأعمال",
           "url":BASE+'/',"logo":BASE+"/assets/app-icon-512.png","image":BASE+"/assets/og-image.png","telephone":PHONE,"email":EMAIL,
@@ -454,7 +494,7 @@ def build():
         legal(Ctx('/terms/',lang),'/terms/',('Terms of service','شروط الخدمة'),TERMS)
         for s in SERVICES: service_page(Ctx(s['slug'],lang), s)
         brief_index(Ctx('/brief/',lang))
-        for b in BRIEFS: brief_page(Ctx(BRIEF_PATH[b['file'].replace('.html','')],lang), b)
+        for b in BRIEFS: brief_page(Ctx(bpath(b),lang), b)
     notfound(Ctx('/404/','en'))
     # sitemap + robots + manifest
     urls=[]
