@@ -322,3 +322,5 @@ footer .credit a{color:var(--gold);font-weight:700}
 footer .credit a:hover{color:#E2C27F}
 .notfound{padding-block:6rem;text-align:center}
 .notfound h1{font-size:clamp(2.4rem,6vw,4rem);color:var(--green);margin-bottom:1rem}
+.past a.btn{display:inline-flex;grid-template-columns:none;background:var(--gold);color:var(--ink);border:0;padding:.85em 1.3em;justify-self:start}
+.past a.btn:hover{background:#d6b46e}
