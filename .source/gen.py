@@ -117,7 +117,7 @@ def write_page(c, title, desc, body, schema=(), og_type='website', has_ar=True, 
 <meta property="og:url" content="{canonical}"><meta property="og:image" content="{BASE}/assets/og-image.png">
 <meta property="og:locale" content="{'ar_AE' if c.ar else 'en_AE'}"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B4F45">
-<link rel="icon" href="{c.asset('favicon.ico')}" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="{c.asset('favicon-32.png')}">
+<link rel="icon" href="{c.asset('favicon.ico')}" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="{'/favicon-192.png' if MODE=='prod' else c.asset('app-icon-192.png')}"><link rel="icon" type="image/png" sizes="32x32" href="{c.asset('favicon-32.png')}">
 <link rel="apple-touch-icon" href="{c.asset('apple-touch-icon-180.png')}"><link rel="manifest" href="{c.asset('site.webmanifest')}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap">
@@ -463,6 +463,7 @@ def build():
         urls.append(f'<url><loc>{BASE}{p}</loc><lastmod>2026-11-09</lastmod><xhtml:link rel="alternate" hreflang="en" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}/ar{p}"/></url>'
                     f'<url><loc>{BASE}/ar{p}</loc><lastmod>2026-11-09</lastmod><xhtml:link rel="alternate" hreflang="en" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}/ar{p}"/></url>')
     open(os.path.join(OUT,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+'\n'.join(urls)+'\n</urlset>\n')
+    shutil.copy(os.path.join(BRAND,'favicon.ico'), os.path.join(OUT,'favicon.ico')); shutil.copy(os.path.join(BRAND,'app-icon-192.png'), os.path.join(OUT,'favicon-192.png'))
     open(os.path.join(OUT,'robots.txt'),'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
     open(os.path.join(OUT,'assets','site.webmanifest'),'w').write(json.dumps({"name":"Laprocx Business Services","short_name":"Laprocx","icons":[{"src":"/assets/app-icon-192.png","sizes":"192x192","type":"image/png"},{"src":"/assets/app-icon-512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#0B4F45","background_color":"#F3F7F5","display":"browser"}))
     print(len(PAGES),'pages ->',OUT)
