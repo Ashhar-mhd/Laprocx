@@ -59,4 +59,9 @@
   if(cf){cf.addEventListener('submit',function(e){e.preventDefault();
     var t=AR?('مرحباً لابروكس، أنا '+$('cf-name').value+'.\nالخدمة: '+$('cf-svc').value+'\n'+$('cf-msg').value):('Hello Laprocx, I am '+$('cf-name').value+'.\nService: '+$('cf-svc').value+'\n'+$('cf-msg').value);
     window.location.href=waLink(t)})}
+  // lead tracking (Google Analytics)
+  function ev(m){try{if(window.gtag)gtag('event','generate_lead',{method:m,page_path:location.pathname})}catch(e){}}
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href');
+    if(h.indexOf('https://wa.me/')===0)ev('whatsapp');else if(h.indexOf('tel:')===0)ev('phone');else if(h.indexOf('mailto:')===0)ev('email')},true);
+  if(cf)cf.addEventListener('submit',function(){ev('contact_form')},true);
 })();
