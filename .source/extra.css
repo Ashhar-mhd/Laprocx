@@ -1,0 +1,53 @@
+
+/* ---- shared additions ---- */
+.lang-link{font-weight:700;font-size:.9rem;text-decoration:none;color:var(--green);border:1px solid var(--line);border-radius:999px;padding:.45rem .8rem;white-space:nowrap}
+.lang-link:hover{border-color:var(--green)}
+body.ar .lang-link{font-family:"Manrope",system-ui,sans-serif}
+body:not(.ar) .lang-link{font-family:"Baloo Bhaijaan 2",system-ui,sans-serif}
+@media (max-width:900px){header .btn{margin-inline-start:0}.lang-link{margin-inline-start:auto}}
+@media (max-width:420px){header.site .btn span{display:none}header.site .btn{padding:.75em}}
+.mnav{display:none}
+@media (max-width:900px){.mnav{display:flex;gap:.4rem;overflow-x:auto;padding-block:0 .6rem;scrollbar-width:none}.mnav a{flex:none;font-size:.85rem;font-weight:600;text-decoration:none;color:var(--green);background:var(--mist);border-radius:999px;padding:.35rem .8rem}}
+.page-hero{background:var(--paper);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background:url("/assets/pattern-tile-light.svg") 0 0/180px;opacity:.5;mask-image:linear-gradient(90deg,transparent 45%,#000 100%);-webkit-mask-image:linear-gradient(90deg,transparent 45%,#000 100%)}
+body.ar .page-hero::before{mask-image:linear-gradient(270deg,transparent 45%,#000 100%);-webkit-mask-image:linear-gradient(270deg,transparent 45%,#000 100%)}
+.page-hero .wrap{position:relative;padding-block:.5rem 3rem}
+.page-hero h1{font-size:clamp(2.2rem,5vw,3.6rem);color:var(--green);margin:.6rem 0 .8rem;font-weight:800;max-width:48rem}
+.page-hero .lede{font-size:1.12rem;color:var(--slate);max-width:42rem}
+.page-hero .btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;max-width:56rem}
+.facts div{background:var(--mist);border-radius:12px;padding:.9rem 1rem}
+.facts dt{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--tag-mint)}
+body.ar .facts dt{letter-spacing:0;font-size:.88rem}
+.facts dd{margin:.2rem 0 0;font-weight:700;font-size:.95rem}
+@media (max-width:760px){.facts{grid-template-columns:1fr}}
+.content{padding-block:3rem 4rem}
+.checks{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.55rem}
+.checks li{display:flex;gap:.7rem;align-items:flex-start}
+.checks li::before{content:"";flex:none;width:18px;height:18px;margin-top:.2em;border-radius:5px;border:2px solid var(--mint)}
+.flow{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.6rem;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:30px 1fr;gap:.8rem;align-items:center}
+.flow li::before{content:counter(f);width:30px;height:30px;border-radius:8px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+body.ar .flow li::before{content:counter(f, arabic-indic)}
+.part .faq details:first-child{padding-top:.2rem}
+.part .faq details:last-child{border-bottom:0;padding-bottom:0}
+.note-sm{font-size:.84rem;color:var(--slate);margin-top:.8rem}
+.prose{max-width:46rem}
+.prose h2{font-size:1.5rem;color:var(--green);margin:2rem 0 .6rem}
+.prose p,.prose li{color:var(--ink)}
+.prose p+p{margin-top:.8rem}
+.prose ul{padding-inline-start:1.2rem}
+.form{display:grid;gap:1rem}
+.form label{font-weight:700;font-size:.9rem;display:grid;gap:.35rem}
+.form input,.form select,.form textarea{font:500 1rem var(--body);padding:.75rem .9rem;border:1.5px solid var(--line);border-radius:10px;background:var(--mist);color:var(--ink);width:100%}
+.form textarea{min-height:120px;resize:vertical}
+.est-out{display:none;margin-top:1.4rem}
+.est-out.on{display:block}
+.est-out h3{font-size:1.3rem;color:var(--green);margin-bottom:.6rem}
+.svc-grid.all{margin-bottom:3rem}
+.sub-h{font-size:1.6rem;color:var(--green);margin:0 0 1rem}
+footer .credit{grid-column:1/-1;margin:0;text-align:end;font-size:.85rem;color:#A9CFC5}
+footer .credit a{color:var(--gold);font-weight:700}
+footer .credit a:hover{color:#E2C27F}
+.notfound{padding-block:6rem;text-align:center}
+.notfound h1{font-size:clamp(2.4rem,6vw,4rem);color:var(--green);margin-bottom:1rem}
