@@ -501,10 +501,18 @@ def build():
     notfound(Ctx('/404/','en'))
     # sitemap + robots + manifest
     urls=[]
+    newest=max(b['date'] for b in BRIEFS)
+    bdate={bpath(b):b['date'] for b in BRIEFS}
+    def lastmod(p):
+        # real change date per page, so Google knows which pages to recrawl
+        if p in bdate: return bdate[p]
+        if p in ('/','/brief/'): return newest
+        sv=[b['date'] for b in BRIEFS if b['svc']==p]
+        return max(sv+['2026-11-09'])
     for p,lang,noi in PAGES:
         if noi or lang!='en': continue
-        urls.append(f'<url><loc>{BASE}{p}</loc><lastmod>2026-11-09</lastmod><xhtml:link rel="alternate" hreflang="en" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}/ar{p}"/></url>'
-                    f'<url><loc>{BASE}/ar{p}</loc><lastmod>2026-11-09</lastmod><xhtml:link rel="alternate" hreflang="en" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}/ar{p}"/></url>')
+        urls.append(f'<url><loc>{BASE}{p}</loc><lastmod>{lastmod(p)}</lastmod><xhtml:link rel="alternate" hreflang="en" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}/ar{p}"/></url>'
+                    f'<url><loc>{BASE}/ar{p}</loc><lastmod>{lastmod(p)}</lastmod><xhtml:link rel="alternate" hreflang="en" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}/ar{p}"/></url>')
     open(os.path.join(OUT,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+'\n'.join(urls)+'\n</urlset>\n')
     shutil.copy(os.path.join(BRAND,'favicon.ico'), os.path.join(OUT,'favicon.ico')); shutil.copy(os.path.join(BRAND,'app-icon-192.png'), os.path.join(OUT,'favicon-192.png')); shutil.copy(os.path.join(BRAND,'favicon-96.png'), os.path.join(OUT,'favicon-96.png'))
     open(os.path.join(OUT,'robots.txt'),'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
